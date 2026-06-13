@@ -51,13 +51,30 @@ docker compose exec app composer install
 docker compose exec app cp .env.example .env
 docker compose exec app php artisan key:generate
 
-# 5. データベースのマイグレーション
+# 5. フロントエンドアセットのビルド（Laravel Breeze）
+docker run --rm -v "%cd%:/app" -w /app node:22-alpine sh -c "npm install && npm run build"
+
+# 6. データベースのマイグレーション
 docker compose exec app php artisan migrate
 ```
 
-**6. ブラウザで確認**
+**7. ブラウザで確認**
 
 http://localhost:8081 にアクセスすると Laravel のトップページが表示されます。
+
+認証機能:
+
+| URL | 内容 |
+|-----|------|
+| http://localhost:8081/register | ユーザー登録 |
+| http://localhost:8081/login | ログイン |
+| http://localhost:8081/dashboard | ダッシュボード（要ログイン） |
+
+> **Windows（PowerShell）でのフロントエンドビルド:** 上記 `%cd%` の代わりに `${PWD}` を使用してください。
+>
+> ```powershell
+> docker run --rm -v "${PWD}:/app" -w /app node:22-alpine sh -c "npm install && npm run build"
+> ```
 
 ### 2回目以降の起動
 
@@ -78,6 +95,7 @@ DB データも含めて完全にリセットする場合:
 docker compose down -v
 docker compose up -d --build
 docker compose exec app composer install
+docker run --rm -v "${PWD}:/app" -w /app node:22-alpine sh -c "npm install && npm run build"
 docker compose exec app php artisan migrate
 ```
 
@@ -180,7 +198,7 @@ docker compose exec app php artisan test
 |-------|------|------|
 | 0 | Laravel プロジェクト初期構築 | 完了 |
 | 1 | Docker 環境構築 | 完了 |
-| 2 | 認証機能（Breeze） | 未着手 |
+| 2 | 認証機能（Breeze） | 完了 |
 | 3 | 日記テーブル・モデル | 未着手 |
 | 4〜 | CRUD・画像・CI 等 | 未着手 |
 
