@@ -1,47 +1,84 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="mb-6 text-center">
+        <h1 class="text-2xl font-bold text-diary-primary">ログイン</h1>
+        <p class="mt-2 text-sm text-diary-muted">メールアドレスとパスワードを入力してください</p>
+    </div>
+
+    @if (session('status'))
+        <div class="mb-4 rounded-xl bg-diary-accent px-4 py-3 text-sm text-diary-primary">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="mb-4">
+            <label for="email" class="mb-2 block text-sm font-medium text-diary-primary">メールアドレス</label>
+            <input
+                id="email"
+                type="email"
+                name="email"
+                value="{{ old('email') }}"
+                required
+                autofocus
+                autocomplete="username"
+                class="w-full rounded-xl border border-gray-200 px-4 py-2 text-diary-text focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary"
+            >
+            @error('email')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="mb-4">
+            <label for="password" class="mb-2 block text-sm font-medium text-diary-primary">パスワード</label>
+            <input
+                id="password"
+                type="password"
+                name="password"
+                required
+                autocomplete="current-password"
+                class="w-full rounded-xl border border-gray-200 px-4 py-2 text-diary-text focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary"
+            >
+            @error('password')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
+        <div class="mb-6 flex items-center">
+            <input
+                id="remember_me"
+                type="checkbox"
+                name="remember"
+                class="rounded border-gray-300 text-diary-primary focus:ring-diary-primary"
+            >
+            <label for="remember_me" class="ms-2 text-sm text-diary-muted">ログイン状態を保持する</label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
+        <button
+            type="submit"
+            class="w-full rounded-xl bg-diary-primary px-8 py-3 text-sm font-semibold text-white transition hover:bg-diary-primary/90"
+        >
+            ログイン
+        </button>
     </form>
+
+    <div class="mt-6 space-y-3 text-center text-sm">
+        @if (Route::has('password.request'))
+            <p>
+                <a href="{{ route('password.request') }}" class="text-diary-muted transition hover:text-diary-primary">
+                    パスワードをお忘れですか？
+                </a>
+            </p>
+        @endif
+
+        @if (Route::has('register'))
+            <p class="text-diary-muted">
+                アカウントをお持ちでない方は
+                <a href="{{ route('register') }}" class="font-semibold text-diary-primary transition hover:text-diary-primary/80">
+                    新規登録
+                </a>
+            </p>
+        @endif
+    </div>
 </x-guest-layout>

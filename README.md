@@ -292,6 +292,20 @@ docker compose exec app ./vendor/bin/pint --test
 | 10 | セキュリティ確認 | 完了 |
 | 11 | GitHub Actions CI | 完了 |
 | 12 | README 整備 | 完了 |
-| 13 | 最終確認 | 未着手 |
+| 13 | 最終確認 | 完了 |
 
 詳細は `kaihatu_flow.md` を参照してください。
+
+## 最終確認（Phase 13）
+
+提出前に以下を確認済みです（2026-06-13）。
+
+| 確認項目 | 結果 |
+|---------|------|
+| Docker 新規構築（`docker compose down -v` → `up -d --build`） | OK |
+| マイグレーション | OK |
+| テスト（60件） | すべて PASS |
+| Laravel Pint | PASS |
+| 主要ルート応答（`/` 200、`/login` 200、`/diaries` 未ログイン時 302） | OK |
+| `.env` が Git 管理外 | OK（`.gitignore` 対象） |
+| デバッグコード（`dd` / `dump` 等） | なし |
