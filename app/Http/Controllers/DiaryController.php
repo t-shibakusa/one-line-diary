@@ -49,4 +49,15 @@ class DiaryController extends Controller
             ->route('diaries.index')
             ->with('status', '日記を更新しました。');
     }
+
+    public function destroy(Diary $diary): RedirectResponse
+    {
+        $this->authorize('delete', $diary);
+
+        $diary->delete();
+
+        return redirect()
+            ->route('diaries.index')
+            ->with('status', '日記を削除しました。');
+    }
 }

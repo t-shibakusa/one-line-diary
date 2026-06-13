@@ -59,5 +59,19 @@
                 </div>
             </form>
         </div>
+
+        <div class="mt-6 rounded-2xl border border-red-100 bg-white p-6 shadow-sm">
+            <h2 class="text-sm font-semibold text-red-600">日記を削除</h2>
+            <p class="mt-2 text-sm text-diary-muted">削除すると元に戻せません。</p>
+            <form method="POST" action="{{ route('diaries.destroy', $diary) }}" class="mt-4"
+                  onsubmit="return confirm('この日記を削除しますか？');">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                        class="rounded-xl border border-red-200 px-6 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-50">
+                    削除する
+                </button>
+            </form>
+        </div>
     </section>
 </x-diary-layout>
