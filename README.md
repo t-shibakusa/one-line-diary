@@ -200,6 +200,7 @@ docker compose exec app php artisan test
 | 1 | Docker 環境構築 | 完了 |
 | 2 | 認証機能（Breeze） | 完了 |
 | 3 | 日記テーブル・モデル | 完了 |
-| 4〜 | CRUD・画像・CI 等 | 未着手 |
+| 4 | 日記一覧表示 | 完了 |
+| 5 | 日記登録 | 未着手 |
 
 詳細は `kaihatu_flow.md` を参照してください。
