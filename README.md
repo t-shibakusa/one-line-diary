@@ -199,7 +199,7 @@ docker compose exec app php artisan test
 | 0 | Laravel プロジェクト初期構築 | 完了 |
 | 1 | Docker 環境構築 | 完了 |
 | 2 | 認証機能（Breeze） | 完了 |
-| 3 | 日記テーブル・モデル | 未着手 |
+| 3 | 日記テーブル・モデル | 完了 |
 | 4〜 | CRUD・画像・CI 等 | 未着手 |
 
 詳細は `kaihatu_flow.md` を参照してください。
