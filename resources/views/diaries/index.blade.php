@@ -1,6 +1,18 @@
 <x-diary-layout>
     <section>
-        <h1 class="mb-6 text-2xl font-bold text-diary-primary">日記一覧</h1>
+        <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-diary-primary">日記一覧</h1>
+            <a href="{{ route('diaries.create') }}"
+               class="rounded-xl bg-diary-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-diary-primary/90">
+                新しく書く
+            </a>
+        </div>
+
+        @if (session('status'))
+            <div class="mb-4 rounded-xl bg-diary-accent px-4 py-3 text-sm text-diary-primary">
+                {{ session('status') }}
+            </div>
+        @endif
 
         @if ($diaries->isEmpty())
             <div class="rounded-2xl bg-white p-10 text-center shadow-sm">
@@ -25,11 +37,13 @@
                             <p class="mt-1 truncate text-diary-text">{{ $diary->body }}</p>
                         </div>
 
-                        <button type="button" class="shrink-0 rounded-lg p-2 text-diary-muted" aria-label="メニュー" disabled>
+                        <a href="{{ route('diaries.edit', $diary) }}"
+                           class="shrink-0 rounded-lg p-2 text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
+                           aria-label="編集">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                             </svg>
-                        </button>
+                        </a>
                     </article>
                 @endforeach
             </div>

@@ -14,6 +14,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/diaries', [DiaryController::class, 'index'])->name('diaries.index');
+    Route::get('/diaries/create', [DiaryController::class, 'create'])->name('diaries.create');
+    Route::post('/diaries', [DiaryController::class, 'store'])->name('diaries.store');
+    Route::get('/diaries/{diary}/edit', [DiaryController::class, 'edit'])->name('diaries.edit');
+    Route::put('/diaries/{diary}', [DiaryController::class, 'update'])->name('diaries.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

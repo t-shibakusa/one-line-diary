@@ -14,8 +14,8 @@
                 $navItems = [
                     ['label' => 'ホーム', 'icon' => 'home', 'route' => null, 'active' => false],
                     ['label' => 'カレンダー', 'icon' => 'calendar', 'route' => null, 'active' => false],
-                    ['label' => '日記一覧', 'icon' => 'list', 'route' => 'diaries.index', 'active' => request()->routeIs('diaries.*')],
-                    ['label' => '新しく書く', 'icon' => 'write', 'route' => null, 'active' => false],
+                    ['label' => '日記一覧', 'icon' => 'list', 'route' => 'diaries.index', 'active' => request()->routeIs('diaries.index', 'diaries.edit')],
+                    ['label' => '新しく書く', 'icon' => 'write', 'route' => 'diaries.create', 'active' => request()->routeIs('diaries.create')],
                     ['label' => 'マイページ', 'icon' => 'user', 'route' => null, 'active' => false],
                     ['label' => '設定', 'icon' => 'settings', 'route' => null, 'active' => false],
                 ];
