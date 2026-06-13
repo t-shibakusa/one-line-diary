@@ -6,6 +6,8 @@ use Database\Factories\DiaryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Diary extends Model
 {
@@ -32,8 +34,27 @@ class Diary extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::deleting(function (Diary $diary): void {
+            $diary->deleteStoredImage();
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function storeUploadedImage(UploadedFile $image): string
+    {
+        return $image->store('', 'diary_images');
+    }
+
+    public function deleteStoredImage(): void
+    {
+        if ($this->image_path) {
+            Storage::disk('diary_images')->delete($this->image_path);
+        }
     }
 }

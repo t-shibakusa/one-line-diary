@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DiaryController;
+use App\Http\Controllers\DiaryImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/diaries/{diary}/edit', [DiaryController::class, 'edit'])->name('diaries.edit');
     Route::put('/diaries/{diary}', [DiaryController::class, 'update'])->name('diaries.update');
     Route::delete('/diaries/{diary}', [DiaryController::class, 'destroy'])->name('diaries.destroy');
+    Route::get('/diaries/{diary}/image', [DiaryImageController::class, 'show'])->name('diaries.image');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

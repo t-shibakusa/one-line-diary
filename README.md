@@ -178,7 +178,35 @@ docker compose exec app php artisan test
 
 ## CI 説明
 
-> Phase 11 で GitHub Actions を構築予定です。
+GitHub Actions（`.github/workflows/ci.yml`）で、push / pull request 時に以下を自動実行します。
+
+1. PHP 8.3 環境のセットアップ
+2. `composer install`
+3. `.env` 作成・`key:generate`・SQLite マイグレーション
+4. `php artisan test`
+5. `./vendor/bin/pint --test`
+
+ローカルでも同じ確認ができます。
+
+```bash
+docker compose exec app php artisan test
+docker compose exec app ./vendor/bin/pint --test
+```
+
+## セキュリティ方針
+
+| 項目 | 対策 |
+|------|------|
+| 未ログインアクセス | 日記関連ルートは `auth` ミドルウェアで保護し、未ログイン時はログイン画面へリダイレクト |
+| 他人の日記操作 | `DiaryPolicy` で view / update / delete を制御し、自分の日記のみ操作可能 |
+| 他人の画像閲覧 | 画像は `GET /diaries/{diary}/image` 経由で配信し、Policy 通過後のみ `Storage::response()` で返却 |
+| CSRF | Laravel 標準の CSRF トークン検証（フォームに `@csrf` を付与） |
+| XSS | Blade の `{{ }}` で出力をエスケープ（日記本文・フラッシュメッセージ等） |
+| SQL Injection | Eloquent / Query Builder を使用し、生 SQL は使わない |
+| 機密情報 | `.env` は `.gitignore` で Git 管理対象外 |
+| 画像保存 | `storage/app/private/diary_images`（`diary_images` ディスク）に保存し、`public` 配下には置かない |
+
+上記は `tests/Feature/DiarySecurityTest.php` および各 Feature Test で確認しています。
 
 ## 設計方針
 
@@ -205,6 +233,10 @@ docker compose exec app php artisan test
 | 6 | 日記編集 | 完了 |
 | 7 | 日記削除 | 完了 |
 | 8 | 日付検索 | 対象外（実装しない） |
-| 9 | 画像アップロード | 未着手 |
+| 9 | 画像アップロード | 完了 |
+| 10 | セキュリティ確認 | 完了 |
+| 11 | GitHub Actions CI | 完了 |
+| 12 | README 整備 | 未着手 |
+| 13 | 最終確認 | 未着手 |
 
 詳細は `kaihatu_flow.md` を参照してください。

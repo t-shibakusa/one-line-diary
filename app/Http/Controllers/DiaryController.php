@@ -27,7 +27,14 @@ class DiaryController extends Controller
 
     public function store(StoreDiaryRequest $request): RedirectResponse
     {
-        $request->user()->diaries()->create($request->validated());
+        $data = $request->safe()->only(['body', 'diary_date']);
+
+        if ($request->hasFile('image')) {
+            $diary = new Diary;
+            $data['image_path'] = $diary->storeUploadedImage($request->file('image'));
+        }
+
+        $request->user()->diaries()->create($data);
 
         return redirect()
             ->route('diaries.index')
@@ -43,7 +50,14 @@ class DiaryController extends Controller
 
     public function update(UpdateDiaryRequest $request, Diary $diary): RedirectResponse
     {
-        $diary->update($request->validated());
+        $data = $request->safe()->only(['body', 'diary_date']);
+
+        if ($request->hasFile('image')) {
+            $diary->deleteStoredImage();
+            $data['image_path'] = $diary->storeUploadedImage($request->file('image'));
+        }
+
+        $diary->update($data);
 
         return redirect()
             ->route('diaries.index')

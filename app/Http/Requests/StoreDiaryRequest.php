@@ -35,6 +35,7 @@ class StoreDiaryRequest extends FormRequest
                     }
                 },
             ],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
     }
 
@@ -49,6 +50,9 @@ class StoreDiaryRequest extends FormRequest
             'diary_date.required' => '日付を入力してください。',
             'diary_date.date' => '日付の形式が正しくありません。',
             'diary_date.unique' => 'この日付の日記は既に登録されています。',
+            'image.image' => '画像ファイルを選択してください。',
+            'image.mimes' => '画像は jpg, jpeg, png, webp 形式のみアップロードできます。',
+            'image.max' => '画像は2MB以下にしてください。',
         ];
     }
 }

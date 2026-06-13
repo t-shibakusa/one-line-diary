@@ -3,7 +3,7 @@
         <h1 class="mb-6 text-2xl font-bold text-diary-primary">日記を編集</h1>
 
         <div class="rounded-2xl bg-white p-6 shadow-sm lg:p-8">
-            <form method="POST" action="{{ route('diaries.update', $diary) }}" x-data="{ body: @js(old('body', $diary->body)) }">
+            <form method="POST" action="{{ route('diaries.update', $diary) }}" enctype="multipart/form-data" x-data="{ body: @js(old('body', $diary->body)) }">
                 @csrf
                 @method('PUT')
 
@@ -42,6 +42,10 @@
                     @error('body')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+                </div>
+
+                <div class="mb-4">
+                    @include('diaries.partials.image-field', ['diary' => $diary, 'currentImage' => $diary->image_path])
                 </div>
 
                 <div class="flex items-center justify-between pt-2">
