@@ -33,11 +33,7 @@
 
                 <div class="flex items-center gap-3">
                     <div class="flex items-center gap-3 rounded-full border border-diary-border bg-diary-surface px-4 py-2 shadow-diary">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-diary-accent text-diary-primary">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
+                        @include('layouts.partials.user-avatar', ['user' => Auth::user(), 'size' => 'sm'])
                         <span class="font-medium text-diary-primary">{{ Auth::user()->name }}</span>
                     </div>
                 </div>

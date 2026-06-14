@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserAvatarRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -30,5 +31,19 @@ class SettingsController extends Controller
     public function password(): View
     {
         return view('settings.password');
+    }
+
+    public function updateAvatar(UpdateUserAvatarRequest $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        $user->deleteStoredAvatar();
+        $avatarPath = $user->storeUploadedAvatar($request->file('avatar'));
+
+        $user->update(['avatar_path' => $avatarPath]);
+
+        return redirect()
+            ->route('settings.index')
+            ->with('status', 'プロフィール画像を更新しました。');
     }
 }

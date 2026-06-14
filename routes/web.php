@@ -4,6 +4,7 @@ use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\DiaryImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UserAvatarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings/theme', [SettingsController::class, 'updateTheme'])->name('settings.theme');
+    Route::put('/settings/avatar', [SettingsController::class, 'updateAvatar'])->name('settings.avatar.update');
+    Route::get('/settings/avatar', [UserAvatarController::class, 'show'])->name('settings.avatar');
     Route::get('/settings/password', [SettingsController::class, 'password'])->name('settings.password');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -45,6 +45,13 @@ return [
             'report' => false,
         ],
 
+        'user_avatars' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/user_avatars'),
+            'throw' => false,
+            'report' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -8,7 +8,9 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -23,6 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'avatar_path',
         'password',
     ];
 
@@ -52,5 +55,30 @@ class User extends Authenticatable
     public function diaries(): HasMany
     {
         return $this->hasMany(Diary::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (User $user): void {
+            $user->deleteStoredAvatar();
+        });
+    }
+
+    public function storeUploadedAvatar(UploadedFile $avatar): string
+    {
+        return $avatar->store('', 'user_avatars');
+    }
+
+    public function deleteStoredAvatar(): void
+    {
+        if ($this->avatar_path) {
+            Storage::disk('user_avatars')->delete($this->avatar_path);
+        }
+    }
+
+    public function hasAvatar(): bool
+    {
+        return $this->avatar_path !== null
+            && Storage::disk('user_avatars')->exists($this->avatar_path);
     }
 }
