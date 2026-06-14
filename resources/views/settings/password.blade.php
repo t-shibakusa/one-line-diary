@@ -1,8 +1,8 @@
 <x-diary-layout>
     <section class="mx-auto max-w-3xl">
-        <div class="mb-6 flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-diary-primary">パスワード変更</h1>
-            <a href="{{ route('settings.index') }}" class="diary-btn-secondary">
+        <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 class="text-xl font-bold text-diary-primary sm:text-2xl">パスワード変更</h1>
+            <a href="{{ route('settings.index') }}" class="diary-btn-secondary w-full justify-center sm:w-auto">
                 設定へ戻る
             </a>
         </div>

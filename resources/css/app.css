@@ -36,7 +36,7 @@
 
 @layer components {
     .diary-card {
-        @apply rounded-2xl border border-diary-border bg-diary-surface p-5 shadow-diary sm:p-6;
+        @apply rounded-2xl border border-diary-border bg-diary-surface p-4 shadow-diary sm:p-5 lg:p-6;
     }
 
     .diary-btn-primary {
@@ -113,7 +113,7 @@
     }
 
     .quick-write-card {
-        @apply rounded-2xl border border-diary-border bg-diary-surface p-4 shadow-diary;
+        @apply rounded-2xl border border-diary-border bg-diary-surface p-3 shadow-diary sm:p-4;
     }
 
     .quick-write-card .quick-write-textarea {

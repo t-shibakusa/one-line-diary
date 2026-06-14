@@ -1,6 +1,6 @@
 <x-diary-layout>
     <section class="mx-auto max-w-3xl">
-        <h1 class="mb-6 text-2xl font-bold text-diary-primary">新しく書く</h1>
+        <h1 class="mb-6 text-xl font-bold text-diary-primary sm:text-2xl">新しく書く</h1>
 
         <div class="diary-card">
             <form method="POST" action="{{ route('diaries.store') }}" enctype="multipart/form-data" x-data="{ body: @js(old('body', '')) }">
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="flex items-center justify-end pt-2">
-                    <button type="submit" class="diary-btn-primary">
+                    <button type="submit" class="diary-btn-primary w-full sm:w-auto">
                         保存する
                     </button>
                 </div>

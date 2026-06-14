@@ -5,16 +5,16 @@
         </h2>
         <div class="flex items-center gap-1">
             <a href="{{ route('diaries.index', ['month' => $calendar['prevMonth']]) }}"
-               class="rounded-md px-2 py-1 text-xs font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
+               class="rounded-md px-3 py-2 text-xs font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
                aria-label="前の月">
                 ‹
             </a>
             <a href="{{ route('diaries.index') }}"
-               class="rounded-md px-2 py-1 text-xs font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary {{ $calendar['month']->format('Y-m') === now()->format('Y-m') ? 'pointer-events-none opacity-40' : '' }}">
+               class="rounded-md px-3 py-2 text-xs font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary {{ $calendar['month']->format('Y-m') === now()->format('Y-m') ? 'pointer-events-none opacity-40' : '' }}">
                 今月
             </a>
             <a href="{{ route('diaries.index', ['month' => $calendar['nextMonth']]) }}"
-               class="rounded-md px-2 py-1 text-xs font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
+               class="rounded-md px-3 py-2 text-xs font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
                aria-label="次の月">
                 ›
             </a>
@@ -34,7 +34,7 @@
                 <tr>
                     @foreach ($week as $day)
                         @php
-                            $dayClasses = 'mx-auto flex h-7 w-7 items-center justify-center rounded-full text-[11px] transition ';
+                            $dayClasses = 'mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs transition sm:h-8 sm:w-8 sm:text-[11px] ';
                             if (! $day['isCurrentMonth']) {
                                 $dayClasses .= 'text-diary-muted/40 ';
                             } elseif ($day['isToday']) {

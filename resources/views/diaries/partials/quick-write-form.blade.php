@@ -44,7 +44,7 @@
                 @include('diaries.partials.image-field-compact')
             </div>
 
-            <button type="submit" class="quick-write-btn shrink-0 self-end">
+            <button type="submit" class="quick-write-btn w-full shrink-0 sm:w-auto sm:self-end">
                 <span aria-hidden="true">🌿</span>
                 保存する
             </button>

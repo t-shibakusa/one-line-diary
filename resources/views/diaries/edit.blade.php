@@ -1,6 +1,6 @@
 <x-diary-layout>
     <section class="mx-auto max-w-3xl">
-        <h1 class="mb-6 text-2xl font-bold text-diary-primary">日記を編集</h1>
+        <h1 class="mb-6 text-xl font-bold text-diary-primary sm:text-2xl">日記を編集</h1>
 
         <div class="diary-card">
             <form method="POST" action="{{ route('diaries.update', $diary) }}" enctype="multipart/form-data" x-data="{ body: @js(old('body', $diary->body)) }">
@@ -50,13 +50,13 @@
                     @include('diaries.partials.image-field', ['diary' => $diary, 'currentImage' => $diary->image_path])
                 </div>
 
-                <div class="flex items-center justify-between pt-2">
+                <div class="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
                     <a href="{{ route('diaries.index') }}"
-                       class="text-sm font-medium text-diary-muted transition hover:text-diary-primary">
+                       class="text-center text-sm font-medium text-diary-muted transition hover:text-diary-primary sm:text-left">
                         ホームに戻る
                     </a>
 
-                    <button type="submit" class="diary-btn-primary">
+                    <button type="submit" class="diary-btn-primary w-full sm:w-auto">
                         更新する
                     </button>
                 </div>

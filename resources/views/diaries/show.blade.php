@@ -1,12 +1,12 @@
 <x-diary-layout>
     <section class="mx-auto max-w-3xl">
-        <div class="mb-6 flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-diary-primary">日記詳細</h1>
-            <div class="flex items-center gap-2">
-                <a href="{{ route('diaries.index') }}" class="diary-btn-secondary">
+        <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 class="text-xl font-bold text-diary-primary sm:text-2xl">日記詳細</h1>
+            <div class="flex flex-wrap gap-2 sm:flex-nowrap">
+                <a href="{{ route('diaries.index') }}" class="diary-btn-secondary flex-1 justify-center sm:flex-none">
                     ホームへ戻る
                 </a>
-                <a href="{{ route('diaries.edit', $diary) }}" class="diary-btn-primary">
+                <a href="{{ route('diaries.edit', $diary) }}" class="diary-btn-primary flex-1 justify-center sm:flex-none">
                     編集する
                 </a>
             </div>

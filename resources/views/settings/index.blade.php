@@ -1,6 +1,6 @@
 <x-diary-layout>
     <section class="mx-auto max-w-3xl">
-        <h1 class="mb-6 text-2xl font-bold text-diary-primary">設定</h1>
+        <h1 class="mb-6 text-xl font-bold text-diary-primary sm:text-2xl">設定</h1>
 
         @if (session('status'))
             <div class="mb-4 rounded-xl border border-diary-border bg-diary-accent px-4 py-3 text-sm text-diary-primary">
@@ -24,7 +24,7 @@
                             <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            <span>画像を選択（jpg / jpeg / png / webp・最大2MB）</span>
+                            <span class="text-xs sm:text-sm">画像を選択（jpg / jpeg / png / webp・最大2MB）</span>
                             <input type="file" name="avatar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="sr-only" onchange="this.form.submit()">
                         </label>
                         @error('avatar')

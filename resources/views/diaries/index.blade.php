@@ -11,7 +11,7 @@
                 @include('diaries.partials.quick-write-form')
 
                 <div id="recent-diaries" class="diary-card scroll-mt-6">
-                    <div class="mb-4 flex items-center justify-between">
+                    <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
                         <h2 class="text-lg font-bold text-diary-primary">最近の日記</h2>
                         <a href="{{ route('diaries.create') }}" class="text-sm font-medium text-diary-primary transition hover:text-diary-primary-dark">
                             新しく書く →
@@ -51,7 +51,7 @@
                                     <div class="relative shrink-0" x-data="{ open: false }">
                                         <button type="button"
                                                 @click="open = !open"
-                                                class="rounded-lg p-2 text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
+                                                class="rounded-lg p-2.5 text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
                                                 aria-label="メニュー">
                                             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
@@ -60,7 +60,7 @@
                                         <div x-show="open"
                                              @click.outside="open = false"
                                              x-cloak
-                                             class="absolute right-0 z-10 mt-1 w-32 rounded-xl border border-diary-border bg-diary-surface py-1 shadow-diary">
+                                             class="absolute end-0 z-10 mt-1 w-36 rounded-xl border border-diary-border bg-diary-surface py-1 shadow-diary">
                                             <a href="{{ route('diaries.show', $diary) }}"
                                                class="block px-4 py-2 text-sm text-diary-text hover:bg-diary-accent">詳細</a>
                                             <a href="{{ route('diaries.edit', $diary) }}"
@@ -72,7 +72,7 @@
                         </ul>
 
                         @if ($diaries->hasPages())
-                            <div class="mt-4 border-t border-diary-border pt-4">
+                            <div class="mt-4 overflow-x-auto border-t border-diary-border pt-4">
                                 {{ $diaries->fragment('recent-diaries')->links() }}
                             </div>
                         @endif

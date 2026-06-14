@@ -1,4 +1,8 @@
-<aside class="fixed inset-y-0 left-0 z-30 flex w-52 flex-col border-r border-diary-border bg-diary-sidebar shadow-diary">
+<aside
+    class="fixed inset-y-0 left-0 z-30 flex w-52 flex-col border-r border-diary-border bg-diary-sidebar shadow-diary transition-transform duration-300 ease-in-out lg:translate-x-0"
+    :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
+    aria-label="メインナビゲーション"
+>
     <div class="flex min-h-screen flex-col px-4 py-6">
         <div class="mb-8 px-2">
             <div class="flex items-center gap-3">
@@ -25,6 +29,7 @@
 
             @foreach ($navItems as $item)
                 <a href="{{ route($item['route']) }}"
+                   @click="sidebarOpen = false"
                    class="sidebar-link {{ $item['active'] ? 'sidebar-link--active' : '' }}">
                     @include('layouts.partials.diary-nav-icon', ['icon' => $item['icon']])
                     {{ $item['label'] }}
@@ -41,7 +46,7 @@
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="sidebar-link w-full">
+                <button type="submit" @click="sidebarOpen = false" class="sidebar-link w-full">
                     @include('layouts.partials.diary-nav-icon', ['icon' => 'logout'])
                     ログアウト
                 </button>
