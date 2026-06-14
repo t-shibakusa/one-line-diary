@@ -29,4 +29,20 @@ class DiaryModelTest extends TestCase
         $this->assertCount(3, $user->diaries);
         $this->assertTrue($user->diaries->contains($diaries->first()));
     }
+
+    public function test_mood_label_and_emoji(): void
+    {
+        $diary = Diary::factory()->create(['mood' => 'great']);
+
+        $this->assertSame('とても良い', $diary->moodLabel());
+        $this->assertSame('😊', $diary->moodEmoji());
+    }
+
+    public function test_mood_label_and_emoji_are_empty_when_unset(): void
+    {
+        $diary = Diary::factory()->create(['mood' => null]);
+
+        $this->assertSame('', $diary->moodLabel());
+        $this->assertSame('', $diary->moodEmoji());
+    }
 }

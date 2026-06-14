@@ -40,10 +40,15 @@
                         </div>
 
                         <div class="min-w-0 flex-1">
-                            <time datetime="{{ $diary->diary_date->format('Y-m-d') }}" class="text-sm font-semibold text-diary-primary">
-                                {{ $diary->diary_date->locale('ja')->isoFormat('YYYY.MM.DD (ddd)') }}
-                            </time>
-                            <p class="mt-1 truncate text-diary-text">{{ $diary->body }}</p>
+                            <p class="truncate text-diary-text">
+                                <time datetime="{{ $diary->diary_date->format('Y-m-d') }}" class="font-semibold text-diary-primary">
+                                    {{ $diary->diary_date->locale('ja')->isoFormat('YYYY.MM.DD') }}
+                                </time>
+                                @if ($diary->mood)
+                                    <span class="mx-1" aria-label="{{ $diary->moodLabel() }}">{{ $diary->moodEmoji() }}</span>
+                                @endif
+                                {{ $diary->body }}
+                            </p>
                         </div>
                     </a>
                 @endforeach

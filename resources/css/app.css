@@ -23,3 +23,21 @@
         --color-diary-border: #374151;
     }
 }
+
+@layer components {
+    .mood-radio {
+        @apply sr-only !static !float-none !m-0 !h-px !w-px;
+    }
+
+    .mood-option {
+        @apply inline-flex cursor-pointer items-center gap-1 rounded-xl border border-gray-200 px-3 py-2 text-sm text-diary-text transition;
+    }
+
+    .mood-option--unset {
+        @apply text-diary-muted;
+    }
+
+    .mood-option[data-selected='true'] {
+        @apply border-diary-primary bg-diary-accent text-diary-primary;
+    }
+}

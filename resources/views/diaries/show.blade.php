@@ -15,9 +15,17 @@
         </div>
 
         <article class="rounded-2xl bg-diary-surface p-6 shadow-sm lg:p-8">
-            <time datetime="{{ $diary->diary_date->format('Y-m-d') }}" class="text-lg font-bold text-diary-primary">
-                {{ $diary->diary_date->locale('ja')->isoFormat('YYYY.MM.DD (ddd)') }}
-            </time>
+            <div class="flex flex-wrap items-center gap-2">
+                <time datetime="{{ $diary->diary_date->format('Y-m-d') }}" class="text-lg font-bold text-diary-primary">
+                    {{ $diary->diary_date->locale('ja')->isoFormat('YYYY.MM.DD (ddd)') }}
+                </time>
+                @if ($diary->mood)
+                    <span class="inline-flex items-center gap-1 rounded-full bg-diary-accent px-3 py-1 text-sm text-diary-primary">
+                        <span aria-hidden="true">{{ $diary->moodEmoji() }}</span>
+                        {{ $diary->moodLabel() }}
+                    </span>
+                @endif
+            </div>
 
             @if ($diary->image_path)
                 <div class="mt-4 overflow-hidden rounded-xl">

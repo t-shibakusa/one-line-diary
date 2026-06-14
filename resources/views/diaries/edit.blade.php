@@ -44,6 +44,8 @@
                     @enderror
                 </div>
 
+                @include('diaries.partials.mood-field', ['selected' => old('mood', $diary->mood)])
+
                 <div class="mb-4">
                     @include('diaries.partials.image-field', ['diary' => $diary, 'currentImage' => $diary->image_path])
                 </div>

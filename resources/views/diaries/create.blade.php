@@ -43,6 +43,8 @@
                     @enderror
                 </div>
 
+                @include('diaries.partials.mood-field')
+
                 <div class="mb-4">
                     @include('diaries.partials.image-field')
                 </div>

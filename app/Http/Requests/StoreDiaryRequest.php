@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Diary;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreDiaryRequest extends FormRequest
 {
@@ -36,7 +38,15 @@ class StoreDiaryRequest extends FormRequest
                 },
             ],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg', 'max:2048'],
+            'mood' => ['nullable', Rule::in(Diary::moodValues())],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('mood') && $this->input('mood') === '') {
+            $this->merge(['mood' => null]);
+        }
     }
 
     /**

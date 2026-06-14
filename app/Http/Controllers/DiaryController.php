@@ -40,7 +40,7 @@ class DiaryController extends Controller
 
     public function store(StoreDiaryRequest $request): RedirectResponse
     {
-        $data = $request->safe()->only(['body', 'diary_date']);
+        $data = $request->safe()->only(['body', 'diary_date', 'mood']);
 
         if ($request->hasFile('image')) {
             $diary = new Diary;
@@ -70,7 +70,7 @@ class DiaryController extends Controller
 
     public function update(UpdateDiaryRequest $request, Diary $diary): RedirectResponse
     {
-        $data = $request->safe()->only(['body', 'diary_date']);
+        $data = $request->safe()->only(['body', 'diary_date', 'mood']);
 
         if ($request->hasFile('image')) {
             $diary->deleteStoredImage();
