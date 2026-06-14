@@ -10,7 +10,7 @@
             <div class="min-w-0 space-y-6">
                 @include('diaries.partials.quick-write-form')
 
-                <div class="diary-card">
+                <div id="recent-diaries" class="diary-card scroll-mt-6">
                     <div class="mb-4 flex items-center justify-between">
                         <h2 class="text-lg font-bold text-diary-primary">最近の日記</h2>
                         <a href="{{ route('diaries.create') }}" class="text-sm font-medium text-diary-primary transition hover:text-diary-primary-dark">
@@ -73,7 +73,7 @@
 
                         @if ($diaries->hasPages())
                             <div class="mt-4 border-t border-diary-border pt-4">
-                                {{ $diaries->links() }}
+                                {{ $diaries->fragment('recent-diaries')->links() }}
                             </div>
                         @endif
                     @endif
@@ -91,4 +91,12 @@
             </aside>
         </div>
     </section>
+
+    @if (request()->has('page'))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('recent-diaries')?.scrollIntoView({ block: 'start' });
+            });
+        </script>
+    @endif
 </x-diary-layout>

@@ -99,6 +99,8 @@ class DiaryIndexTest extends TestCase
         $response->assertOk();
         $response->assertSee('日記5');
         $response->assertDontSee('日記0');
+        $response->assertSee('id="recent-diaries"', false);
+        $response->assertSee('#recent-diaries', false);
     }
 
     public function test_index_displays_diary_image_below_body(): void
