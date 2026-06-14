@@ -28,7 +28,9 @@ class DiaryController extends Controller
             ->paginate(5)
             ->withQueryString();
 
-        return view('diaries.index', compact('diaries', 'calendar'));
+        $plant = $request->user()->plantStatus();
+
+        return view('diaries.index', compact('diaries', 'calendar', 'plant'));
     }
 
     public function create(): View

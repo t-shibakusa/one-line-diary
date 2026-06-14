@@ -2,7 +2,7 @@
     <section>
         <h1 class="mb-6 text-2xl font-bold text-diary-primary">新しく書く</h1>
 
-        <div class="rounded-2xl bg-white p-6 shadow-sm lg:p-8">
+        <div class="rounded-2xl bg-diary-surface p-6 shadow-sm lg:p-8">
             <form method="POST" action="{{ route('diaries.store') }}" enctype="multipart/form-data" x-data="{ body: @js(old('body', '')) }">
                 @csrf
 

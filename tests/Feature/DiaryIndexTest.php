@@ -31,6 +31,8 @@ class DiaryIndexTest extends TestCase
         $response->assertOk();
         $response->assertSee('今日は晴れだった');
         $response->assertSee('2025.05.19');
+        $response->assertSee(route('diaries.show', $diary), false);
+        $response->assertDontSee(route('diaries.edit', $diary), false);
     }
 
     public function test_authenticated_user_cannot_see_other_users_diaries(): void

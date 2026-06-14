@@ -3,6 +3,8 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
+
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -16,11 +18,13 @@ export default {
             },
             colors: {
                 diary: {
-                    bg: '#F8F9F8',
-                    primary: '#1B4332',
-                    accent: '#E8F3EE',
-                    text: '#374151',
-                    muted: '#6B7280',
+                    bg: 'var(--color-diary-bg)',
+                    primary: 'var(--color-diary-primary)',
+                    accent: 'var(--color-diary-accent)',
+                    text: 'var(--color-diary-text)',
+                    muted: 'var(--color-diary-muted)',
+                    surface: 'var(--color-diary-surface)',
+                    border: 'var(--color-diary-border)',
                 },
             },
         },

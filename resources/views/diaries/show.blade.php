@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <article class="rounded-2xl bg-white p-6 shadow-sm lg:p-8">
+        <article class="rounded-2xl bg-diary-surface p-6 shadow-sm lg:p-8">
             <time datetime="{{ $diary->diary_date->format('Y-m-d') }}" class="text-lg font-bold text-diary-primary">
                 {{ $diary->diary_date->locale('ja')->isoFormat('YYYY.MM.DD (ddd)') }}
             </time>

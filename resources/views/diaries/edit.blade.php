@@ -2,7 +2,7 @@
     <section>
         <h1 class="mb-6 text-2xl font-bold text-diary-primary">日記を編集</h1>
 
-        <div class="rounded-2xl bg-white p-6 shadow-sm lg:p-8">
+        <div class="rounded-2xl bg-diary-surface p-6 shadow-sm lg:p-8">
             <form method="POST" action="{{ route('diaries.update', $diary) }}" enctype="multipart/form-data" x-data="{ body: @js(old('body', $diary->body)) }">
                 @csrf
                 @method('PUT')
@@ -64,7 +64,7 @@
             </form>
         </div>
 
-        <div class="mt-6 rounded-2xl border border-red-100 bg-white p-6 shadow-sm">
+        <div class="mt-6 rounded-2xl border border-red-100 bg-diary-surface p-6 shadow-sm">
             <h2 class="text-sm font-semibold text-red-600">日記を削除</h2>
             <p class="mt-2 text-sm text-diary-muted">削除すると元に戻せません。</p>
             <form method="POST" action="{{ route('diaries.destroy', $diary) }}" class="mt-4"

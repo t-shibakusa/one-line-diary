@@ -1,4 +1,4 @@
-<aside class="fixed inset-y-0 left-0 z-30 flex w-64 flex-col bg-white shadow-sm rounded-r-2xl">
+<aside class="fixed inset-y-0 left-0 z-30 flex w-64 flex-col rounded-r-2xl bg-diary-surface shadow-sm">
     <div class="flex min-h-screen flex-col px-5 py-6">
         <div class="mb-8 flex items-center gap-2 px-2">
             <div class="flex h-8 w-8 items-center justify-center rounded-full bg-diary-accent text-diary-primary">
@@ -14,7 +14,7 @@
                 $navItems = [
                     ['label' => '日記一覧', 'icon' => 'list', 'route' => 'diaries.index', 'active' => request()->routeIs('diaries.index', 'diaries.edit', 'diaries.show')],
                     ['label' => '新しく書く', 'icon' => 'write', 'route' => 'diaries.create', 'active' => request()->routeIs('diaries.create')],
-                    ['label' => '設定', 'icon' => 'settings', 'route' => null, 'active' => false],
+                    ['label' => '設定', 'icon' => 'settings', 'route' => 'settings.index', 'active' => request()->routeIs('settings.*')],
                 ];
             @endphp
 

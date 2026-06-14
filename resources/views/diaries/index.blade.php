@@ -8,6 +8,8 @@
             </a>
         </div>
 
+        @include('diaries.partials.plant-card', ['plant' => $plant])
+
         @include('diaries.partials.calendar')
 
         @if (session('status'))
@@ -17,13 +19,14 @@
         @endif
 
         @if ($diaries->isEmpty())
-            <div class="rounded-2xl bg-white p-10 text-center shadow-sm">
+            <div class="rounded-2xl bg-diary-surface p-10 text-center shadow-sm">
                 <p class="text-diary-muted">まだ日記がありません。</p>
             </div>
         @else
             <div class="space-y-4">
                 @foreach ($diaries as $diary)
-                    <article class="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                    <a href="{{ route('diaries.show', $diary) }}"
+                       class="flex items-center gap-4 rounded-2xl bg-diary-surface p-4 shadow-sm transition hover:bg-diary-accent/30">
                         <div class="h-16 w-24 shrink-0 overflow-hidden rounded-xl bg-diary-accent">
                             @if ($diary->image_path)
                                 <img src="{{ route('diaries.image', $diary) }}" alt="" class="h-full w-full object-cover">
@@ -42,15 +45,7 @@
                             </time>
                             <p class="mt-1 truncate text-diary-text">{{ $diary->body }}</p>
                         </div>
-
-                        <a href="{{ route('diaries.edit', $diary) }}"
-                           class="shrink-0 rounded-lg p-2 text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary"
-                           aria-label="編集">
-                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                            </svg>
-                        </a>
-                    </article>
+                    </a>
                 @endforeach
             </div>
 

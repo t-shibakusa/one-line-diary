@@ -1,4 +1,4 @@
-<div class="mb-6 mx-auto max-w-md rounded-2xl bg-white p-3 shadow-sm sm:p-4">
+<div class="mb-6 mx-auto max-w-md rounded-2xl bg-diary-surface p-3 shadow-sm sm:p-4">
     <div class="mb-2 flex items-center justify-between">
         <h2 class="text-base font-bold text-diary-primary">
             {{ $calendar['month']->locale('ja')->isoFormat('YYYY年M月') }}

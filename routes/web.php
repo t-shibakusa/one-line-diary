@@ -3,6 +3,7 @@
 use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\DiaryImageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/diaries/{diary}', [DiaryController::class, 'update'])->name('diaries.update');
     Route::delete('/diaries/{diary}', [DiaryController::class, 'destroy'])->name('diaries.destroy');
     Route::get('/diaries/{diary}/image', [DiaryImageController::class, 'show'])->name('diaries.image');
+
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::put('/settings/theme', [SettingsController::class, 'updateTheme'])->name('settings.theme');
+    Route::get('/settings/password', [SettingsController::class, 'password'])->name('settings.password');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

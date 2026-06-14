@@ -1,8 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
+<style>
     :root {
         --color-diary-bg: #f8f9f8;
         --color-diary-primary: #1b4332;
@@ -22,4 +18,4 @@
         --color-diary-surface: #1f2937;
         --color-diary-border: #374151;
     }
-}
+</style>
