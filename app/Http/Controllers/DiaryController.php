@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDiaryRequest;
 use App\Http\Requests\UpdateDiaryRequest;
 use App\Models\Diary;
+use App\Models\User;
 use App\Support\DiaryCalendarBuilder;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -30,7 +32,38 @@ class DiaryController extends Controller
 
         $plant = $request->user()->plantStatus();
 
-        return view('diaries.index', compact('diaries', 'calendar', 'plant'));
+        $moodStats = $this->monthlyMoodStats($request->user(), $calendar['month']);
+
+        return view('diaries.index', compact('diaries', 'calendar', 'plant', 'moodStats'));
+    }
+
+    /**
+     * @return list<array{value: string, label: string, emoji: string, count: int}>
+     */
+    private function monthlyMoodStats(User $user, Carbon $month): array
+    {
+        $counts = $user->diaries()
+            ->whereBetween('diary_date', [
+                $month->copy()->startOfMonth()->format('Y-m-d'),
+                $month->copy()->endOfMonth()->format('Y-m-d'),
+            ])
+            ->whereNotNull('mood')
+            ->selectRaw('mood, count(*) as total')
+            ->groupBy('mood')
+            ->pluck('total', 'mood');
+
+        $stats = [];
+
+        foreach (Diary::MOODS as $value => $info) {
+            $stats[] = [
+                'value' => $value,
+                'label' => $info['label'],
+                'emoji' => $info['emoji'],
+                'count' => (int) ($counts[$value] ?? 0),
+            ];
+        }
+
+        return $stats;
     }
 
     public function create(): View

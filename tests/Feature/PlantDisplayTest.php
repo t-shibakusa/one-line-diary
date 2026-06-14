@@ -31,7 +31,7 @@ class PlantDisplayTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('今日の植物');
-        $response->assertSee('芽 Lv.2');
+        $response->assertSee('Lv.2 芽');
         $response->assertSee('日記投稿数：4件');
         $response->assertSee('次の成長まであと3件');
         $response->assertSee('images/plants/plant_lv_05.png', false);
@@ -45,7 +45,7 @@ class PlantDisplayTest extends TestCase
         $response = $this->actingAs($user)->get(route('diaries.index'));
 
         $response->assertOk();
-        $response->assertSee('木 Lv.5');
+        $response->assertSee('Lv.5 木');
         $response->assertSee('最大まで成長しました');
         $response->assertDontSee('次の成長まであと');
     }

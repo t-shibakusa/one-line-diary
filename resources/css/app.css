@@ -3,34 +3,77 @@
 @tailwind utilities;
 
 @layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
     :root {
-        --color-diary-bg: #f8f9f8;
-        --color-diary-primary: #1b4332;
-        --color-diary-accent: #e8f3ee;
-        --color-diary-text: #374151;
-        --color-diary-muted: #6b7280;
-        --color-diary-surface: #ffffff;
-        --color-diary-border: #e5e7eb;
+        --color-diary-bg: #f3efe6;
+        --color-diary-primary: #5a7a52;
+        --color-diary-primary-dark: #4a6344;
+        --color-diary-accent: #e4eddf;
+        --color-diary-accent-soft: #f0f5ec;
+        --color-diary-text: #4a4a4a;
+        --color-diary-muted: #8a8a8a;
+        --color-diary-surface: #fffdf9;
+        --color-diary-border: #e8e2d8;
+        --color-diary-sidebar: #faf7f2;
     }
 
     html.dark {
-        --color-diary-bg: #121714;
-        --color-diary-primary: #95d5b2;
-        --color-diary-accent: #1b4332;
-        --color-diary-text: #e5e7eb;
-        --color-diary-muted: #9ca3af;
-        --color-diary-surface: #1f2937;
-        --color-diary-border: #374151;
+        --color-diary-bg: #1a1f18;
+        --color-diary-primary: #a8c9a0;
+        --color-diary-primary-dark: #8fb386;
+        --color-diary-accent: #2d3b28;
+        --color-diary-accent-soft: #242b21;
+        --color-diary-text: #e8ebe6;
+        --color-diary-muted: #a0a89c;
+        --color-diary-surface: #252b23;
+        --color-diary-border: #3a4236;
+        --color-diary-sidebar: #202620;
     }
 }
 
 @layer components {
+    .diary-card {
+        @apply rounded-2xl border border-diary-border bg-diary-surface p-5 shadow-diary sm:p-6;
+    }
+
+    .diary-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-diary-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-diary-primary-dark;
+    }
+
+    .diary-btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl border border-diary-border bg-diary-surface px-4 py-2 text-sm font-semibold text-diary-muted transition hover:border-diary-primary hover:text-diary-primary;
+    }
+
+    .diary-input {
+        @apply w-full rounded-xl border border-diary-border bg-diary-accent-soft px-4 py-2.5 text-diary-text transition focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary;
+    }
+
+    .diary-textarea {
+        @apply w-full resize-none rounded-xl border border-diary-border bg-diary-accent-soft px-4 py-3 pb-8 text-diary-text placeholder:text-diary-muted focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary;
+    }
+
+    .sidebar-link {
+        @apply relative flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary;
+    }
+
+    .sidebar-link--active {
+        @apply bg-diary-accent text-diary-primary;
+    }
+
+    .sidebar-link--active::before {
+        content: '';
+        @apply absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-diary-primary;
+    }
+
     .mood-radio {
         @apply sr-only !static !float-none !m-0 !h-px !w-px;
     }
 
     .mood-option {
-        @apply inline-flex cursor-pointer items-center gap-1 rounded-xl border border-gray-200 px-3 py-2 text-sm text-diary-text transition;
+        @apply inline-flex cursor-pointer items-center gap-1 rounded-xl border border-diary-border px-3 py-2 text-sm text-diary-text transition;
     }
 
     .mood-option--unset {
@@ -39,5 +82,63 @@
 
     .mood-option[data-selected='true'] {
         @apply border-diary-primary bg-diary-accent text-diary-primary;
+    }
+
+    .mood-circle {
+        @apply flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-2 border-transparent text-xl transition;
+    }
+
+    .mood-circle[data-selected='true'] {
+        @apply scale-110 border-diary-primary shadow-sm;
+    }
+
+    .mood-circle--great {
+        @apply bg-[#dcefd4];
+    }
+
+    .mood-circle--good {
+        @apply bg-[#e8f4c8];
+    }
+
+    .mood-circle--normal {
+        @apply bg-[#f5f0c8];
+    }
+
+    .mood-circle--tired {
+        @apply bg-[#dce8f0];
+    }
+
+    .mood-circle--bad {
+        @apply bg-[#f0dce4];
+    }
+
+    .quick-write-card {
+        @apply rounded-2xl border border-diary-border bg-diary-surface p-4 shadow-diary;
+    }
+
+    .quick-write-card .quick-write-textarea {
+        @apply w-full resize-none rounded-lg border border-diary-border bg-diary-accent-soft px-3 py-2 pb-6 text-sm text-diary-text placeholder:text-diary-muted focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary;
+    }
+
+    .quick-write-card .mood-circle {
+        @apply h-9 w-9 text-base;
+    }
+
+    .quick-write-card .quick-write-btn {
+        @apply inline-flex items-center justify-center gap-1.5 rounded-lg bg-diary-primary px-5 py-2 text-xs font-semibold text-white transition hover:bg-diary-primary-dark;
+    }
+
+    .quick-write-card .quick-write-image-label {
+        @apply flex cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-diary-border px-3 py-2 text-xs text-diary-muted transition hover:border-diary-primary hover:text-diary-primary;
+    }
+
+    .home-dashboard {
+        @apply grid grid-cols-1 gap-6;
+    }
+
+    @screen lg {
+        .home-dashboard {
+            grid-template-columns: minmax(0, 1fr) 320px;
+        }
     }
 }

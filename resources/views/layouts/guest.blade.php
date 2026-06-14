@@ -15,17 +15,25 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-diary-bg text-diary-text">
-        <div class="flex min-h-screen flex-col items-center justify-center px-4 py-10">
-            <div class="mb-8 flex items-center gap-2">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-diary-accent text-diary-primary">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+            <div class="absolute -right-16 top-16 h-56 w-56 rounded-full bg-diary-accent/40 blur-3xl"></div>
+            <div class="absolute bottom-10 left-10 h-40 w-40 rounded-full bg-diary-accent/30 blur-3xl"></div>
+        </div>
+
+        <div class="relative flex min-h-screen flex-col items-center justify-center px-4 py-10">
+            <div class="mb-8 flex items-center gap-3">
+                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-diary-accent text-diary-primary">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c2 2 4 6 4 9a4 4 0 11-8 0c0-3 2-7 4-9z" />
                     </svg>
                 </div>
-                <span class="text-2xl font-semibold text-diary-primary">一行日記</span>
+                <div>
+                    <p class="text-2xl font-bold text-diary-primary">Green Diary</p>
+                    <p class="text-sm text-diary-muted">一行日記</p>
+                </div>
             </div>
 
-            <div class="w-full max-w-md rounded-2xl bg-diary-surface p-6 shadow-sm sm:p-8">
+            <div class="w-full max-w-md diary-card">
                 {{ $slot }}
             </div>
         </div>

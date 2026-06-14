@@ -122,20 +122,31 @@ trait HasPlantGrowth
      *     image_url: string,
      *     diary_count: int,
      *     until_next_level: int|null,
-     *     is_max_level: bool
+     *     is_max_level: bool,
+     *     progress_current: int,
+     *     progress_target: int|null,
+     *     progress_percent: int
      * }
      */
     public function plantStatus(): array
     {
+        $diaryCount = $this->diaries()->count();
+        $progressTarget = $this->nextPlantLevelCount();
+
         return [
             'level' => $this->plantLevel(),
             'image_level' => $this->plantImageLevel(),
             'name' => $this->plantName(),
             'emoji' => $this->plantEmoji(),
             'image_url' => $this->plantImageUrl(),
-            'diary_count' => $this->diaries()->count(),
+            'diary_count' => $diaryCount,
             'until_next_level' => $this->diariesUntilNextPlantLevel(),
             'is_max_level' => $this->plantLevel() === 5,
+            'progress_current' => $diaryCount,
+            'progress_target' => $progressTarget,
+            'progress_percent' => $progressTarget
+                ? min(100, (int) round($diaryCount / $progressTarget * 100))
+                : 100,
         ];
     }
 }

@@ -20,12 +20,18 @@ export default {
                 diary: {
                     bg: 'var(--color-diary-bg)',
                     primary: 'var(--color-diary-primary)',
+                    'primary-dark': 'var(--color-diary-primary-dark)',
                     accent: 'var(--color-diary-accent)',
+                    'accent-soft': 'var(--color-diary-accent-soft)',
                     text: 'var(--color-diary-text)',
                     muted: 'var(--color-diary-muted)',
                     surface: 'var(--color-diary-surface)',
                     border: 'var(--color-diary-border)',
+                    sidebar: 'var(--color-diary-sidebar)',
                 },
+            },
+            boxShadow: {
+                diary: '0 4px 20px rgba(90, 122, 82, 0.08)',
             },
         },
     },
@@ -35,5 +41,10 @@ export default {
     safelist: [
         'grid-cols-7',
         'aspect-square',
+        'mood-circle--great',
+        'mood-circle--good',
+        'mood-circle--normal',
+        'mood-circle--tired',
+        'mood-circle--bad',
     ],
 };

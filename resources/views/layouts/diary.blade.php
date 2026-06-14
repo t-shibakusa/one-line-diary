@@ -15,21 +15,35 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-diary-bg text-diary-text">
+        <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+            <div class="absolute -right-20 top-10 h-64 w-64 rounded-full bg-diary-accent/40 blur-3xl"></div>
+            <div class="absolute bottom-20 left-1/3 h-48 w-48 rounded-full bg-diary-accent/30 blur-3xl"></div>
+        </div>
+
         @include('layouts.partials.diary-sidebar')
 
-        <div class="min-h-screen pl-64">
-            <header class="flex items-center justify-end px-6 py-4 lg:px-10">
-                <div class="flex items-center gap-3 rounded-full bg-diary-surface px-4 py-2 shadow-sm">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-full bg-diary-accent text-diary-primary">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c2 2 4 6 4 9a4 4 0 11-8 0c0-3 2-7 4-9z" />
-                        </svg>
+        <div class="relative min-h-screen pl-52">
+            <header class="flex items-center justify-between px-8 py-6 lg:px-10">
+                <div>
+                    <h1 class="text-2xl font-bold text-diary-primary">
+                        こんにちは、{{ Auth::user()->name }} さん
+                    </h1>
+                    <p class="mt-1 text-sm text-diary-muted">今日も一行、心を整える時間を。</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 rounded-full border border-diary-border bg-diary-surface px-4 py-2 shadow-diary">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-diary-accent text-diary-primary">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <span class="font-medium text-diary-primary">{{ Auth::user()->name }}</span>
                     </div>
-                    <span class="font-medium text-diary-primary">{{ Auth::user()->name }}</span>
                 </div>
             </header>
 
-            <main class="px-6 pb-10 lg:px-10">
+            <main class="px-8 pb-10 lg:px-10">
                 {{ $slot }}
             </main>
         </div>

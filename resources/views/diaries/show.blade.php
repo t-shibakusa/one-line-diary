@@ -1,20 +1,18 @@
 <x-diary-layout>
-    <section>
+    <section class="mx-auto max-w-3xl">
         <div class="mb-6 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-diary-primary">日記詳細</h1>
             <div class="flex items-center gap-2">
-                <a href="{{ route('diaries.index') }}"
-                   class="rounded-xl px-4 py-2 text-sm font-semibold text-diary-muted transition hover:bg-diary-accent hover:text-diary-primary">
-                    一覧へ戻る
+                <a href="{{ route('diaries.index') }}" class="diary-btn-secondary">
+                    ホームへ戻る
                 </a>
-                <a href="{{ route('diaries.edit', $diary) }}"
-                   class="rounded-xl bg-diary-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-diary-primary/90">
+                <a href="{{ route('diaries.edit', $diary) }}" class="diary-btn-primary">
                     編集する
                 </a>
             </div>
         </div>
 
-        <article class="rounded-2xl bg-diary-surface p-6 shadow-sm lg:p-8">
+        <article class="diary-card">
             <div class="flex flex-wrap items-center gap-2">
                 <time datetime="{{ $diary->diary_date->format('Y-m-d') }}" class="text-lg font-bold text-diary-primary">
                     {{ $diary->diary_date->locale('ja')->isoFormat('YYYY.MM.DD (ddd)') }}
@@ -27,13 +25,13 @@
                 @endif
             </div>
 
+            <p class="mt-4 whitespace-pre-wrap leading-relaxed text-diary-text">{{ $diary->body }}</p>
+
             @if ($diary->image_path)
-                <div class="mt-4 overflow-hidden rounded-xl">
-                    <img src="{{ route('diaries.image', $diary) }}" alt="" class="max-h-80 w-full object-cover">
+                <div class="mt-4 rounded-xl bg-diary-accent-soft p-2">
+                    <img src="{{ route('diaries.image', $diary) }}" alt="" class="mx-auto h-auto max-w-full rounded-lg">
                 </div>
             @endif
-
-            <p class="mt-4 whitespace-pre-wrap text-diary-text">{{ $diary->body }}</p>
         </article>
     </section>
 </x-diary-layout>

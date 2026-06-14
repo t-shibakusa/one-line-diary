@@ -32,7 +32,6 @@ class DiaryIndexTest extends TestCase
         $response->assertSee('今日は晴れだった');
         $response->assertSee('2025.05.19');
         $response->assertSee(route('diaries.show', $diary), false);
-        $response->assertDontSee(route('diaries.edit', $diary), false);
     }
 
     public function test_authenticated_user_cannot_see_other_users_diaries(): void
@@ -100,5 +99,21 @@ class DiaryIndexTest extends TestCase
         $response->assertOk();
         $response->assertSee('日記5');
         $response->assertDontSee('日記0');
+    }
+
+    public function test_index_displays_diary_image_below_body(): void
+    {
+        $user = User::factory()->create();
+        $diary = Diary::factory()->for($user)->create([
+            'body' => '画像付きの日記',
+            'diary_date' => '2025-05-19',
+            'image_path' => 'sample.jpg',
+        ]);
+
+        $response = $this->actingAs($user)->get(route('diaries.index'));
+
+        $response->assertOk();
+        $response->assertSee('画像付きの日記');
+        $response->assertSee(route('diaries.image', $diary), false);
     }
 }

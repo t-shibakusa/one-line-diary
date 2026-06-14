@@ -23,7 +23,7 @@
                 required
                 autofocus
                 autocomplete="username"
-                class="w-full rounded-xl border border-gray-200 px-4 py-2 text-diary-text focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary"
+                class="diary-input"
             >
             @error('email')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -38,7 +38,7 @@
                 name="password"
                 required
                 autocomplete="current-password"
-                class="w-full rounded-xl border border-gray-200 px-4 py-2 text-diary-text focus:border-diary-primary focus:outline-none focus:ring-1 focus:ring-diary-primary"
+                class="diary-input"
             >
             @error('password')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -57,7 +57,7 @@
 
         <button
             type="submit"
-            class="w-full rounded-xl bg-diary-primary px-8 py-3 text-sm font-semibold text-white transition hover:bg-diary-primary/90"
+            class="w-full diary-btn-primary py-3"
         >
             ログイン
         </button>

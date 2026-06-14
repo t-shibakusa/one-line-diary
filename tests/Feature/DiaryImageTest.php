@@ -38,6 +38,18 @@ class DiaryImageTest extends TestCase
         Storage::disk('diary_images')->assertExists($diary->image_path);
     }
 
+    public function test_home_quick_write_form_includes_image_upload(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('diaries.index'));
+
+        $response->assertOk();
+        $response->assertSee('今日の一行を書く');
+        $response->assertSee('画像を追加（jpg / jpeg・最大2MB）', false);
+        $response->assertSee('enctype="multipart/form-data"', false);
+    }
+
     public function test_user_can_create_diary_with_jpeg_image(): void
     {
         $user = User::factory()->create();
