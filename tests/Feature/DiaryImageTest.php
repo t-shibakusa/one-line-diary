@@ -38,7 +38,22 @@ class DiaryImageTest extends TestCase
         Storage::disk('diary_images')->assertExists($diary->image_path);
     }
 
-    public function test_user_can_create_diary_with_png_image(): void
+    public function test_user_can_create_diary_with_jpeg_image(): void
+    {
+        $user = User::factory()->create();
+        $image = UploadedFile::fake()->image('photo.jpeg');
+
+        $response = $this->actingAs($user)->post(route('diaries.store'), [
+            'body' => 'JPEG画像付き日記',
+            'diary_date' => '2025-05-19',
+            'image' => $image,
+        ]);
+
+        $response->assertRedirect(route('diaries.index'));
+        Storage::disk('diary_images')->assertExists(Diary::query()->first()->image_path);
+    }
+
+    public function test_png_image_is_rejected(): void
     {
         $user = User::factory()->create();
         $image = UploadedFile::fake()->image('photo.png');
@@ -49,11 +64,10 @@ class DiaryImageTest extends TestCase
             'image' => $image,
         ]);
 
-        $response->assertRedirect(route('diaries.index'));
-        Storage::disk('diary_images')->assertExists(Diary::query()->first()->image_path);
+        $response->assertSessionHasErrors('image');
     }
 
-    public function test_user_can_create_diary_with_webp_image(): void
+    public function test_webp_image_is_rejected(): void
     {
         $user = User::factory()->create();
 
@@ -69,8 +83,7 @@ class DiaryImageTest extends TestCase
             'image' => $image,
         ]);
 
-        $response->assertRedirect(route('diaries.index'));
-        Storage::disk('diary_images')->assertExists(Diary::query()->first()->image_path);
+        $response->assertSessionHasErrors('image');
     }
 
     public function test_invalid_image_extension_is_rejected(): void

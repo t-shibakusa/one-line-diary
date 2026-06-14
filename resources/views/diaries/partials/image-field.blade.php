@@ -10,8 +10,8 @@
         <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c2 2 4 6 4 9a4 4 0 11-8 0c0-3 2-7 4-9z" />
         </svg>
-        <span>画像を追加（jpg / png / webp・最大2MB）</span>
-        <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="sr-only">
+        <span>画像を追加（jpg / jpeg・最大2MB）</span>
+        <input type="file" id="image" name="image" accept=".jpg,.jpeg,image/jpeg" class="sr-only">
     </label>
     @error('image')
         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
