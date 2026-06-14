@@ -5,19 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDiaryRequest;
 use App\Http\Requests\UpdateDiaryRequest;
 use App\Models\Diary;
+use App\Support\DiaryCalendarBuilder;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DiaryController extends Controller
 {
-    public function index(): View
+    public function index(Request $request, DiaryCalendarBuilder $calendarBuilder): View
     {
-        $diaries = auth()->user()
+        $month = $request->query('month');
+
+        try {
+            $calendar = $calendarBuilder->build($request->user(), is_string($month) ? $month : null);
+        } catch (\InvalidArgumentException) {
+            $calendar = $calendarBuilder->build($request->user(), null);
+        }
+
+        $diaries = $request->user()
             ->diaries()
             ->orderByDesc('diary_date')
-            ->paginate(5);
+            ->paginate(5)
+            ->withQueryString();
 
-        return view('diaries.index', compact('diaries'));
+        return view('diaries.index', compact('diaries', 'calendar'));
     }
 
     public function create(): View
@@ -39,6 +50,13 @@ class DiaryController extends Controller
         return redirect()
             ->route('diaries.index')
             ->with('status', '日記を保存しました。');
+    }
+
+    public function show(Diary $diary): View
+    {
+        $this->authorize('view', $diary);
+
+        return view('diaries.show', compact('diary'));
     }
 
     public function edit(Diary $diary): View

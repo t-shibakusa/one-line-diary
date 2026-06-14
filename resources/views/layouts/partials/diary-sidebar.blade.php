@@ -12,8 +12,7 @@
         <nav class="space-y-1">
             @php
                 $navItems = [
-                    ['label' => 'カレンダー', 'icon' => 'calendar', 'route' => null, 'active' => false],
-                    ['label' => '日記一覧', 'icon' => 'list', 'route' => 'diaries.index', 'active' => request()->routeIs('diaries.index', 'diaries.edit')],
+                    ['label' => '日記一覧', 'icon' => 'list', 'route' => 'diaries.index', 'active' => request()->routeIs('diaries.index', 'diaries.edit', 'diaries.show')],
                     ['label' => '新しく書く', 'icon' => 'write', 'route' => 'diaries.create', 'active' => request()->routeIs('diaries.create')],
                     ['label' => '設定', 'icon' => 'settings', 'route' => null, 'active' => false],
                 ];

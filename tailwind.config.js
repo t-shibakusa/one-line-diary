@@ -27,4 +27,9 @@ export default {
     },
 
     plugins: [forms],
+
+    safelist: [
+        'grid-cols-7',
+        'aspect-square',
+    ],
 };

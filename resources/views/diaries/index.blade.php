@@ -8,6 +8,8 @@
             </a>
         </div>
 
+        @include('diaries.partials.calendar')
+
         @if (session('status'))
             <div class="mb-4 rounded-xl bg-diary-accent px-4 py-3 text-sm text-diary-primary">
                 {{ session('status') }}
