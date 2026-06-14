@@ -27,10 +27,13 @@ test.describe('Diary flows', () => {
     });
 
     test('pagination keeps recent diaries section in view', async ({ page }) => {
-        await page.getByRole('link', { name: '2', exact: true }).click();
-        await expect(page).toHaveURL(/page=2#recent-diaries$/);
-
         const recentSection = page.locator('#recent-diaries');
+
+        await expect(recentSection.getByRole('navigation', { name: 'Pagination Navigation' })).toBeVisible();
+        await recentSection.locator('a[href*="page=2"]').click();
+
+        await expect(page).toHaveURL(/page=2/);
+        await expect(page).toHaveURL(/#recent-diaries/);
         await expect(recentSection).toBeVisible();
         await expect(recentSection.getByRole('heading', { name: '最近の日記' })).toBeVisible();
     });
